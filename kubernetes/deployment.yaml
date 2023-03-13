@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: cicd-node-sample
+    app.kubernetes.io/instance: cicd-node-sample-instance
+    app.kubernetes.io/version: '1.0.0'
+    app.kubernetes.io/managed-by: kubectl
+  name: cicd-node-sample-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicd-node-sample
+  template:
+    metadata:
+      labels:
+        app: cicd-node-sample
+    spec:
+      containers:
+        - image: 167693783846.dkr.ecr.us-east-2.amazonaws.com/cicd-node-sample:latest
+          imagePullPolicy: Always
+          name: cicd-node-sample
+          ports:
+            - containerPort: 3000
